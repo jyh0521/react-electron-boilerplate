@@ -3,13 +3,14 @@
 }
 
 .App-header {
+  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 1.5vmin);
-  color: #333;
+  font-size: calc(10px + 2vmin);
+  color: white;
   padding: 20px;
 }
 
@@ -19,39 +20,87 @@ h1 {
 }
 
 .electron-info {
-  margin: 20px 0;
-  padding: 15px;
-  background-color: #eee;
-  border-radius: 8px;
-  font-size: calc(10px + 0.5vmin);
+  margin: 15px 0;
+  font-size: 14px;
+  opacity: 0.8;
+  border-top: 1px solid #61dafb;
+  border-bottom: 1px solid #61dafb;
+  padding: 10px 0;
+  width: 100%;
+  max-width: 600px;
+}
+
+.page {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.second-page {
+  background-color: #1a1c23;
 }
 
 .counter {
   display: flex;
   align-items: center;
-  margin-top: 20px;
+  margin: 20px 0;
 }
 
 .counter button {
-  background-color: #4caf50;
+  background-color: #61dafb;
+  color: #282c34;
   border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 5px 15px;
   margin: 0 10px;
   cursor: pointer;
-  border-radius: 4px;
   transition: background-color 0.3s;
 }
 
 .counter button:hover {
-  background-color: #45a049;
+  background-color: #4fa8c7;
 }
 
 .counter span {
   font-size: 24px;
-  min-width: 50px;
+  min-width: 40px;
+}
+
+.input-section {
+  margin: 20px 0;
+  width: 80%;
+  max-width: 400px;
+}
+
+.input-section input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #61dafb;
+  border-radius: 4px;
+  background-color: #282c34;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.navigation {
+  margin-top: 30px;
+}
+
+.nav-button {
+  display: inline-block;
+  background-color: #61dafb;
+  color: #282c34;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: #4fa8c7;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 } 

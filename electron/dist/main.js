@@ -51,8 +51,8 @@ function createWindow() {
     log('Creating main window...');
     // 브라우저 창을 생성합니다.
     mainWindow = new electron_1.BrowserWindow({
-        width: 900,
-        height: 680,
+        width: 1024,
+        height: 768,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,

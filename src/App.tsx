@@ -1,29 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { RouterProvider, createHashRouter } from 'react-router-dom';
 import './App.css';
 
-const App: React.FC = () => {
-  const [count, setCount] = useState<number>(0);
+// 페이지 컴포넌트 가져오기
+import HomePage from './pages/HomePage';
+import SecondPage from './pages/SecondPage';
 
+// 해시 라우터 설정 (Electron 애플리케이션에 더 적합함)
+const router = createHashRouter([
+  {
+    path: '/',
+    element: <HomePage />,
+  },
+  {
+    path: '/second',
+    element: <SecondPage />,
+  }
+]);
+
+const App: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>리액트 + 일렉트론 보일러플레이트</h1>
-        <p>
-          이것은 리액트와 일렉트론을 함께 사용하는 보일러플레이트입니다.
-        </p>
-        <div className="electron-info">
-          <p>
-            현재 사용 중인 Node <span id="node-version"></span>,
-            Chromium <span id="chrome-version"></span>,
-            그리고 Electron <span id="electron-version"></span> 버전입니다.
-          </p>
-        </div>
-        <div className="counter">
-          <button onClick={() => setCount(count - 1)}>-</button>
-          <span>{count}</span>
-          <button onClick={() => setCount(count + 1)}>+</button>
-        </div>
-      </header>
+      <RouterProvider router={router} />
     </div>
   );
 };
