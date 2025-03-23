@@ -1,0 +1,109 @@
+{
+  "name": "react-electron-boilerplate",
+  "version": "1.0.0",
+  "description": "React와 Electron을 함께 사용하는 보일러플레이트",
+  "main": "electron/dist/main.js",
+  "homepage": "./",
+  "scripts": {
+    "start": "concurrently \"yarn start:react\" \"yarn start:electron\"",
+    "start:react": "cross-env BROWSER=none react-scripts start",
+    "start:electron": "wait-on http://localhost:3000 && tsc -p electron && electron .",
+    "build": "react-scripts build",
+    "build:electron": "tsc -p electron",
+    "clean": "rimraf dist release",
+    "force-clean": "powershell -Command \"if(Test-Path dist) {Remove-Item -Path dist -Recurse -Force} if(Test-Path release) {Remove-Item -Path release -Recurse -Force}\"",
+    
+    "package": "yarn build && yarn build:electron && node -e \"const { execSync } = require('child_process'); console.log('개발용 빌드를 생성합니다...'); try { execSync('rimraf dist', {stdio: 'inherit'}); execSync('electron-builder --dir --config.directories.output=dist', {stdio: 'inherit'}); console.log('빌드 완료! dist/win-unpacked 폴더에서 실행 파일을 찾을 수 있습니다.'); } catch(e) { console.error('빌드 실패:', e); }\"",
+    "package:win": "yarn build && yarn build:electron && node -e \"const { execSync } = require('child_process'); console.log('Windows 개발용 빌드를 생성합니다...'); try { execSync('rimraf dist', {stdio: 'inherit'}); execSync('electron-builder --dir --win --config.directories.output=dist', {stdio: 'inherit'}); console.log('빌드 완료! dist/win-unpacked 폴더에서 실행 파일을 찾을 수 있습니다.'); } catch(e) { console.error('빌드 실패:', e); }\"",
+    "package:mac": "yarn build && yarn build:electron && node -e \"const { execSync } = require('child_process'); console.log('macOS 개발용 빌드를 생성합니다...'); try { execSync('rimraf dist', {stdio: 'inherit'}); execSync('electron-builder --dir --mac --config.directories.output=dist', {stdio: 'inherit'}); console.log('빌드 완료! dist/mac 폴더에서 앱을 찾을 수 있습니다.'); } catch(e) { console.error('빌드 실패:', e); }\"",
+    "package:linux": "yarn build && yarn build:electron && node -e \"const { execSync } = require('child_process'); console.log('Linux 개발용 빌드를 생성합니다...'); try { execSync('rimraf dist', {stdio: 'inherit'}); execSync('electron-builder --dir --linux --config.directories.output=dist', {stdio: 'inherit'}); console.log('빌드 완료! dist/linux-unpacked 폴더에서 실행 파일을 찾을 수 있습니다.'); } catch(e) { console.error('빌드 실패:', e); }\"",
+    
+    "dist": "yarn build && yarn build:electron && node -e \"const { execSync } = require('child_process'); console.log('Windows 인스톨러를 생성합니다...'); try { execSync('rimraf release', {stdio: 'inherit'}); execSync('electron-builder --win --x64 --config.nsis.oneClick=false --config.directories.output=release', {stdio: 'inherit'}); console.log('인스톨러 생성 완료! release 폴더에서 Setup 파일을 찾을 수 있습니다.'); } catch(e) { console.error('빌드 실패:', e); }\"",
+    "dist:win": "yarn build && yarn build:electron && node -e \"const { execSync } = require('child_process'); console.log('Windows 인스톨러를 생성합니다...'); try { execSync('rimraf release', {stdio: 'inherit'}); execSync('electron-builder --win --x64 --config.nsis.oneClick=false --config.directories.output=release', {stdio: 'inherit'}); console.log('Windows 인스톨러 생성 완료! release 폴더에서 Setup 파일을 찾을 수 있습니다.'); } catch(e) { console.error('빌드 실패:', e); }\"",
+    "dist:mac": "yarn build && yarn build:electron && node -e \"const { execSync } = require('child_process'); console.log('macOS 인스톨러를 생성합니다...'); try { execSync('rimraf release', {stdio: 'inherit'}); execSync('electron-builder --mac --config.directories.output=release', {stdio: 'inherit'}); console.log('macOS 인스톨러 생성 완료! release 폴더에서 DMG 파일을 찾을 수 있습니다.'); } catch(e) { console.error('빌드 실패:', e); }\"", 
+    "dist:linux": "yarn build && yarn build:electron && node -e \"const { execSync } = require('child_process'); console.log('Linux 인스톨러를 생성합니다...'); try { execSync('rimraf release', {stdio: 'inherit'}); execSync('electron-builder --linux --config.directories.output=release', {stdio: 'inherit'}); console.log('Linux 인스톨러 생성 완료! release 폴더에서 AppImage 파일을 찾을 수 있습니다.'); } catch(e) { console.error('빌드 실패:', e); }\"",
+    
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "electron-is-dev": "^2.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1"
+  },
+  "devDependencies": {
+    "@types/electron": "^1.6.12",
+    "@types/jest": "^29.5.1",
+    "@types/node": "^18.16.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "concurrently": "^8.0.1",
+    "cross-env": "^7.0.3",
+    "electron": "^35.0.3",
+    "electron-builder": "^23.6.0",
+    "rimraf": "^5.0.1",
+    "typescript": "^4.9.5",
+    "wait-on": "^7.0.1"
+  },
+  "build": {
+    "appId": "com.example.react-electron-app",
+    "productName": "ReactElectronApp",
+    "extends": null,
+    "asar": false,
+    "files": [
+      "build/**/*",
+      "electron/dist/**/*",
+      "package.json"
+    ],
+    "extraMetadata": {
+      "main": "electron/dist/main.js"
+    },
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist_new"
+    },
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "assets/icon.icns"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Development"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

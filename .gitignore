@@ -1,0 +1,31 @@
+# 의존성
+/node_modules
+/.pnp
+.pnp.js
+
+# 테스팅
+/coverage
+
+# 생산 빌드
+/build
+/dist
+/dir*
+/release*
+
+# 기타
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 로그
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 에디터 설정
+.idea
+.vscode
+*.swp
+*.swo 
